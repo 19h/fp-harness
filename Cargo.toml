@@ -1,0 +1,21 @@
+[package]
+name = "fp-harness"
+version = "0.1.0"
+edition = "2021"
+description = "Targeted RAX-based control-flow harness for fairplayd.arm64e"
+
+[dependencies]
+# Emulation substrate only: the portable software AArch64 core and the
+# user-mode address space. No KVM/HVF/JIT features are needed.
+rax = { path = ".deps/rax", default-features = false }
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+sha2 = "0.10"
+
+[profile.release]
+# Fast emulation matters more than debug line info here; the harness records
+# guest PCs in its own trace.
+lto = "thin"
+
+[workspace]
+exclude = [".deps/rax"]

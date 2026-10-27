@@ -1,0 +1,28 @@
+digraph fairplayd {
+  rankdir=LR; node [shape=box, fontname="Menlo", fontsize=9];
+  n0 [label="B0\n0x100004530\n2 insns", shape=box];
+  n1 [label="B1\n0x100004538\n3 insns", shape=box];
+  n2 [label="B2\n0x100004544\n3 insns", shape=box];
+  n3 [label="B3\n0x100004550\n3 insns", shape=box];
+  n4 [label="B4\n0x10000455c\n4 insns", shape=box];
+  n5 [label="B5\n0x10000456c\n9 insns", shape=box];
+  n6 [label="B6\n0x10000459c\n12 insns", shape=box];
+  n7 [label="B7\n0x1000045cc\n7 insns", shape=box];
+  n8 [label="ext\n0x1000045e8", shape=ellipse];
+  n9 [label="ext\n0x100004590", shape=ellipse];
+  n10 [label="ext\n0x500008000", shape=ellipse];
+  n11 [label="exit", shape=ellipse];
+  n0 -> n1 [label="tbz not-taken", color="#9a6700"];
+  n0 -> n7 [label="tbz taken", color="#1a7f37", penwidth=2];
+  n1 -> n2 [label="b.ne not-taken", color="#9a6700"];
+  n1 -> n7 [label="b.ne taken", color="#1a7f37", penwidth=2];
+  n2 -> n3 [label="b.ne not-taken", color="#9a6700"];
+  n2 -> n7 [label="b.ne taken", color="#1a7f37", penwidth=2];
+  n3 -> n4 [label="b.ne not-taken", color="#9a6700"];
+  n4 -> n5 [label="b.ne not-taken", color="#9a6700"];
+  n5 -> n6 [label="cbnz taken", color="#1a7f37"];
+  n6 -> n10 [label="ret"];
+  n6 -> n11 [label="return", color="#cf222e"];
+  n7 -> n10 [label="ret"];
+  n7 -> n11 [label="return", color="#cf222e"];
+}
